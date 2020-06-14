@@ -1,8 +1,6 @@
 # whois
 
----
-
-> Whois lookup for any domain.
+Whois lookup for any domain.
 
 ### Install
 
