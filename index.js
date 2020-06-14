@@ -16,34 +16,28 @@ exports.lookup = (domain, opts) => {
         return
       }
 
-      const referData = await Whois.lookup(domain, WHOIS_IANA_SERVER, opts);
+      let data = await Whois.lookup(domain, WHOIS_IANA_SERVER, opts);
+      
       const regex = new RegExp("refer:(.*?)\n");
-      const matches = regex.exec(referData);
+      const matches = regex.exec(data);
 
-      if (!matches || matches.length < 2) {
-        reject(`IANA whois returned no refer data for ${domain}`);
-        return;
+      if (matches && matches.length >= 2) {
+        const refer = matches[1].trim();
+        data = await Whois.lookup(domain, refer, opts);
       }
-
-      const refer = matches[1].trim();
-      if (!refer) {
-        reject(`IANA whois returned no refer data for ${domain}`);
-        return;
-      }
-
-      const whoisDataRaw = await Whois.lookup(domain, refer, opts);
-      if (!whoisDataRaw.length) {
+      
+      if (!data.length) {
         reject(`Whois returned empty response for ${domain}`);
         return;
       }
 
-      const whoisData = Parser.parse(whoisDataRaw);
-      if (!Object.keys(whoisData).length) {
-        reject(`Unknown whois data for ${domain}: ${whoisDataRaw}`);
+      const dataParsed = Parser.parse(data);
+      if (!Object.keys(dataParsed).length) {
+        reject(`Unknown whois data for ${domain}: ${data}`);
         return;
       }
 
-      resolve(whoisData);
+      resolve(dataParsed);
 
     } catch (err) {
       reject(err);
