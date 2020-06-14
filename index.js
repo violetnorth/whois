@@ -33,7 +33,7 @@ exports.lookup = (domain, opts) => {
 
       const dataParsed = Parser.parse(data);
       if (!Object.keys(dataParsed).length) {
-        reject(`Unknown whois data for ${domain}: ${data}`);
+        reject(`Unknown whois data for ${domain}`);
         return;
       }
 
