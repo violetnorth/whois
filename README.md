@@ -11,13 +11,13 @@
 Install with [npm](https://www.npmjs.com/):
 
 ```shell
-$ npm install --save vn-whois
+$ npm install --save @violetnorth/whois
 ```
 
 ### Usage
 
 ```javascript
-const whois = require("vn-whois");
+const whois = require("@violetnorth/whois");
 
 const whoisData = await whois.lookup("example.com", {timeout = 10});
 ```
