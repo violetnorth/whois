@@ -211,7 +211,7 @@ exports.parse = data => {
   for (let line of data.split("\n")) {
     line = line.trim().toLowerCase();
 
-    if (!line || line.startsWith("%") || line.startsWith("#")) {
+    if (!line || line.startsWith("%") || line.startsWith("#") || line.startsWith(">")) {
       continue;
     }
 

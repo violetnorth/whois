@@ -1,6 +1,6 @@
 {
   "name": "@violetnorth/whois",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "WHOIS lookup by Violetnorth",
   "main": "index.js",
   "scripts": {
