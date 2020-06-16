@@ -35,7 +35,8 @@ exports.lookup = (domain, server, {timeout = 30000} = {}) => {
     });
 
     socket.on("timeout", () => {
-      reject(`whois lookup timed out for ${domain}`);
+      const err = new Error(`whois lookup timed out for ${domain} on ${server}`);
+      reject(err);
       return;
     });
   });

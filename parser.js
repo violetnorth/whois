@@ -239,5 +239,6 @@ exports.parse = data => {
     }
   }
 
+  whoisData.raw = data.trim();
   return whoisData;
 };
